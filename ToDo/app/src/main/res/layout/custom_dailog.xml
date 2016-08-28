@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:minHeight="200dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <!-- Heading -->
+
+    <!-- Task Description -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add New Task"
+        android:textColor="@color/primary"
+        android:id="@+id/textView" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/toDoText"
+        android:layout_below="@+id/textView">
+        <EditText android:id="@+id/input_task_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+
+            android:hint="To Do" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toDoText"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Prority"
+        android:textColor="@color/primary"
+        android:focusable="true"
+        android:id="@+id/prority" />
+    <RadioGroup
+        android:layout_below="@+id/prority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:id="@+id/toDoRG"
+        android:checkedButton="@+id/radio_patient">
+        <RadioButton android:id="@+id/high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"
+            android:gravity="center"/>
+        <RadioButton android:id="@+id/normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:gravity="center"/>
+        <RadioButton android:id="@+id/low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"/>
+
+    </RadioGroup>
+    <CheckBox
+        android:layout_below="@id/toDoRG"
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed?"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_signup"
+        android:layout_below="@+id/checkbox"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="Save"
+        android:textColor="@color/icons"
+        android:background="@color/primary"
+        android:elevation="10dp">
+
+    </android.support.v7.widget.AppCompatButton>
+
+
+</RelativeLayout>
