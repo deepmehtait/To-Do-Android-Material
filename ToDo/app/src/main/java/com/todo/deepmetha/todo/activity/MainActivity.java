@@ -2,13 +2,20 @@ package com.todo.deepmetha.todo.activity;
 
 
 import android.app.Dialog;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.todo.deepmetha.todo.R;
 import com.todo.deepmetha.todo.adapters.ToDoListAdapter;
@@ -58,6 +65,26 @@ public class MainActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.custom_dailog);
                 dialog.show();
+                Button save = (Button) dialog.findViewById(R.id.btn_save);
+
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.v(AppTager.getTag(),"save clicked");
+                        EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
+                        RadioGroup proritySelection = (RadioGroup) dialog.findViewById(R.id.toDoRG);
+                        String RadioSelection = new String();
+                        if(proritySelection.getCheckedRadioButtonId() != -1) {
+                            int id = proritySelection.getCheckedRadioButtonId();
+                            View radiobutton = proritySelection.findViewById(id);
+                            int radioId = proritySelection.indexOfChild(radiobutton);
+                            RadioButton btn = (RadioButton) proritySelection.getChildAt(radioId);
+                            RadioSelection = (String) btn.getText();
+                        }
+                        Log.v(AppTager.getTag(),"To Do -" + todoText.getText() + " prority - " + RadioSelection);
+                    }
+                });
+
             }
         });
     }

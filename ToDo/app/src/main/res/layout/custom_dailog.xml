@@ -26,8 +26,7 @@
         <EditText android:id="@+id/input_task_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-
+            android:inputType="text"
             android:hint="To Do" />
     </android.support.design.widget.TextInputLayout>
 
@@ -48,7 +47,7 @@
         android:gravity="center"
         android:layout_marginLeft="80dp"
         android:id="@+id/toDoRG"
-        android:checkedButton="@+id/radio_patient">
+        android:checkedButton="@+id/normal">
         <RadioButton android:id="@+id/high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +75,7 @@
         android:gravity="center"/>
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_save"
         android:layout_below="@+id/checkbox"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

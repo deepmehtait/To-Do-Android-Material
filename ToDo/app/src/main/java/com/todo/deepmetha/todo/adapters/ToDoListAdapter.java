@@ -1,6 +1,7 @@
 package com.todo.deepmetha.todo.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
 
         public ToDoListViewHolder(View view, final Context context) {
             super(view);
-            todoDetails = (TextView) view.findViewById(R.id.toDoText);
+            todoDetails = (TextView) view.findViewById(R.id.toDoTextDetails);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
