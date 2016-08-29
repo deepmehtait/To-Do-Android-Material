@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<ToDoData> tdd = new ArrayList<ToDoData>();
+    ArrayList<ToDoData> tdd = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         tdd.add(td2);
         tdd.add(td1);
         tdd.add(td3);
-        tdd.add(td2);
-        tdd.add(td1);
         adapter = new ToDoListAdapter(tdd, getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
