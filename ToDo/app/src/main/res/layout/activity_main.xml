@@ -9,15 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.todo.deepmetha.todo.activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hello World"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view_s">
+    </android.support.v7.widget.RecyclerView>
+
     <ImageButton
         android:layout_width="56dp"
         android:layout_height="56dp"
