@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,8 +83,19 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                 Cursor b = mysqlite.deleteTask(id);
                 if (b.getCount() == 0) {
                     Toast.makeText(view.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Code here will run in UI thread
+                            Log.v(AppTager.getTag(), "IN UI thread");
+                            /* ToDoDataArrayList.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position,ToDoDataArrayList.size()); */
+                            //notifyDataSetChanged();
+                        }
+                    });
                 } else {
-                    Toast.makeText(view.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Deleted else", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -97,7 +109,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                 dialog.show();
                 EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
                 CheckBox cb = (CheckBox) dialog.findViewById(R.id.checkbox);
-                if(td.getToDoTaskStatus().matches("Complete")) {
+                if (td.getToDoTaskStatus().matches("Complete")) {
                     cb.setChecked(true);
                 }
                 todoText.setText(td.getToDoTaskDetails());
@@ -134,16 +146,27 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                             }
                             SqliteHelper mysqlite = new SqliteHelper(view.getContext());
                             Cursor b = mysqlite.updateTask(updateTd);
+                            ToDoDataArrayList.set(position, updateTd);
                             if (b.getCount() == 0) {
-                                Toast.makeText(view.getContext(), "Some thing went wrong", Toast.LENGTH_SHORT);
+                                //Toast.makeText(view.getContext(), "Some thing went wrong", Toast.LENGTH_SHORT).show();
+                                new Handler().post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Code here will run in UI thread
+                                        Log.v(AppTager.getTag(), "IN UI thread");
+                                        notifyDataSetChanged();
+                                    }
+                                });
                                 dialog.hide();
                             } else {
+
+
                                 dialog.hide();
 
                             }
 
                         } else {
-                            Toast.makeText(view.getContext(), "Please enter To Do Task", Toast.LENGTH_SHORT);
+                            Toast.makeText(view.getContext(), "Please enter To Do Task", Toast.LENGTH_SHORT).show();
                         }
                         Log.v(AppTager.getTag(), "Save Clicked of edit");
                     }

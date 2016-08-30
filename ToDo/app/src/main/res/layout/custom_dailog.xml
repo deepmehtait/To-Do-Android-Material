@@ -78,26 +78,41 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toDoRG"
+        android:focusable="true"
+        android:text="Task Status"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/primary" />
+
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toDoRG"
+        android:layout_below="@id/status"
+        android:layout_centerInParent="true"
         android:gravity="center"
         android:text="Completed?" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_save"
-        android:layout_width="fill_parent"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/checkbox"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/primary"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/transparent"
         android:elevation="10dp"
         android:padding="12dp"
         android:text="Save"
-        android:textColor="@color/icons">
+        android:textColor="@color/primary"
+        android:textColorLink="@color/primary"
+        android:textSize="15sp">
 
     </android.support.v7.widget.AppCompatButton>
 

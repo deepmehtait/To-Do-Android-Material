@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.todo.deepmetha.todo.R;
@@ -66,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 dialog.show();
                 Button save = (Button) dialog.findViewById(R.id.btn_save);
                 CheckBox cb = (CheckBox) dialog.findViewById(R.id.checkbox);
+                TextView tvstatus = (TextView) dialog.findViewById(R.id.status);
                 cb.setVisibility(View.GONE);
+                tvstatus.setVisibility(View.GONE);
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
