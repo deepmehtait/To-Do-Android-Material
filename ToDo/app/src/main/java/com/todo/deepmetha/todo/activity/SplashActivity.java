@@ -12,6 +12,7 @@ import com.todo.deepmetha.todo.sqlite.SqliteHelper;
  */
 public class SplashActivity extends AppCompatActivity {
     SqliteHelper mySqliteHelper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

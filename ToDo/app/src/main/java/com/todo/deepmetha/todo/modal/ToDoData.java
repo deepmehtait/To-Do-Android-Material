@@ -39,5 +39,9 @@ public class ToDoData {
         ToDoTaskStatus = toDoTaskStatus;
     }
 
+    @Override
+    public String toString() {
+        return "ToDoData {id-"+ToDoID+", taskDetails-"+ToDoTaskDetails+", propity-"+ToDoTaskPrority+", status-"+ToDoTaskStatus+"}";
+    }
 
 }

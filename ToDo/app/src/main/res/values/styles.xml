@@ -10,6 +10,7 @@
     <!-- Splash Screen Theme -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
 </resources>
