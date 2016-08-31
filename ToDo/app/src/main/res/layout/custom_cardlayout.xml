@@ -39,9 +39,21 @@
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/typeCircle"
                 android:fontFamily="sans-serif"
-                android:text="Movie Name \n new mobie \n new"
+                android:text="Movie Name"
+                android:textStyle="bold"
                 android:textColor="@color/primary_text"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/toDoTextNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Movie Name"
+                android:textColor="@color/primary_text"
+                android:textSize="14dp"
+                android:layout_below="@+id/edit"
+                android:layout_alignLeft="@+id/toDoTextDetails"
+                android:layout_alignStart="@+id/toDoTextDetails" />
 
             <ImageView
                 android:id="@+id/edit"

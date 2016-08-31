@@ -60,6 +60,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
     public void onBindViewHolder(ToDoListViewHolder holder, final int position) {
         final ToDoData td = ToDoDataArrayList.get(position);
         holder.todoDetails.setText(td.getToDoTaskDetails());
+        holder.todoNotes.setText(td.getToDoNotes());
         String tdStatus = td.getToDoTaskStatus();
         if (tdStatus.matches("Complete")) {
             holder.todoDetails.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
@@ -108,17 +109,30 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                 dialog.setContentView(R.layout.custom_dailog);
                 dialog.show();
                 EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
+                EditText todoNote = (EditText) dialog.findViewById(R.id.input_task_notes);
                 CheckBox cb = (CheckBox) dialog.findViewById(R.id.checkbox);
+                RadioButton rbHigh = (RadioButton) dialog.findViewById(R.id.high);
+                RadioButton rbNormal = (RadioButton) dialog.findViewById(R.id.normal);
+                RadioButton rbLow = (RadioButton) dialog.findViewById(R.id.low);
+                if(td.getToDoTaskPrority().matches("Normal")) {
+                    rbNormal.setChecked(true);
+                } else if(td.getToDoTaskPrority().matches("Low")) {
+                    rbLow.setChecked(true);
+                } else {
+                    rbHigh.setChecked(true);
+                }
                 if (td.getToDoTaskStatus().matches("Complete")) {
                     cb.setChecked(true);
                 }
                 todoText.setText(td.getToDoTaskDetails());
+                todoNote.setText(td.getToDoNotes());
                 Log.v(AppTager.getTag(), td.toString());
                 Button save = (Button) dialog.findViewById(R.id.btn_save);
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
+                        EditText todoNote = (EditText) dialog.findViewById(R.id.input_task_notes);
                         CheckBox cb = (CheckBox) dialog.findViewById(R.id.checkbox);
                         if (todoText.getText().length() >= 2) {
                             RadioGroup proritySelection = (RadioGroup) dialog.findViewById(R.id.toDoRG);
@@ -131,14 +145,11 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                                 RadioSelection = (String) btn.getText();
                             }
                             Log.v(AppTager.getTag(), "To Do -" + todoText.getText() + " prority - " + RadioSelection);
-                            ContentValues contentValues = new ContentValues();
-                            contentValues.put("ToDoTaskDetails", todoText.getText().toString());
-                            contentValues.put("ToDoTaskPrority", RadioSelection);
-                            contentValues.put("ToDoTaskStatus", "Incomplete");
                             ToDoData updateTd = new ToDoData();
                             updateTd.setToDoID(td.getToDoID());
                             updateTd.setToDoTaskDetails(todoText.getText().toString());
                             updateTd.setToDoTaskPrority(RadioSelection);
+                            updateTd.setToDoNotes(todoNote.getText().toString());
                             if (cb.isChecked()) {
                                 updateTd.setToDoTaskStatus("Complete");
                             } else {
@@ -184,7 +195,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
     }
 
     public class ToDoListViewHolder extends RecyclerView.ViewHolder {
-        TextView todoDetails;
+        TextView todoDetails, todoNotes;
         ImageButton proprityColor;
         ImageView edit, deleteButton;
         ToDoData toDoData;
@@ -192,6 +203,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
         public ToDoListViewHolder(View view, final Context context) {
             super(view);
             todoDetails = (TextView) view.findViewById(R.id.toDoTextDetails);
+            todoNotes = (TextView) view.findViewById(R.id.toDoTextNotes);
             proprityColor = (ImageButton) view.findViewById(R.id.typeCircle);
             edit = (ImageView) view.findViewById(R.id.edit);
             deleteButton = (ImageView) view.findViewById(R.id.delete);

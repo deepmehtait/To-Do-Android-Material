@@ -21,6 +21,13 @@
         <activity android:name=".activity.MainActivity">
 
         </activity>
+        <receiver android:name=".activity.AlarmRecever" >
+        </receiver>
+
+        <service
+            android:name=".activity.NotificationService"
+            android:enabled="true" />
     </application>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>

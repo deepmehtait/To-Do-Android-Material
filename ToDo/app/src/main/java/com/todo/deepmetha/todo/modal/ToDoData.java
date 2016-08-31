@@ -5,7 +5,7 @@ package com.todo.deepmetha.todo.modal;
  */
 public class ToDoData {
     int ToDoID;
-    String ToDoTaskDetails, ToDoTaskPrority, ToDoTaskStatus;
+    String ToDoTaskDetails, ToDoTaskPrority, ToDoTaskStatus, ToDoNotes;
 
     public int getToDoID() {
         return ToDoID;
@@ -39,9 +39,17 @@ public class ToDoData {
         ToDoTaskStatus = toDoTaskStatus;
     }
 
+    public String getToDoNotes() {
+        return ToDoNotes;
+    }
+
+    public void setToDoNotes(String toDoNotes) {
+        ToDoNotes = toDoNotes;
+    }
+
     @Override
     public String toString() {
-        return "ToDoData {id-"+ToDoID+", taskDetails-"+ToDoTaskDetails+", propity-"+ToDoTaskPrority+", status-"+ToDoTaskStatus+"}";
+        return "ToDoData {id-" + ToDoID + ", taskDetails-" + ToDoTaskDetails + ", propity-" + ToDoTaskPrority + ", status-" + ToDoTaskStatus + ", notes-" + ToDoNotes + "}";
     }
 
 }

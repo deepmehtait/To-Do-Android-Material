@@ -19,6 +19,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String Col_2 = "ToDoTaskDetails";
     public static final String Col_3 = "ToDoTaskPrority";
     public static final String Col_4 = "ToDoTaskStatus";
+    public static final String Col_5 = "ToDoNotes";
 
     // Create DB to store To Do Tasks
     public SqliteHelper(Context context) {
@@ -29,7 +30,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     // Create Table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "create table if not exists " + TableName + " ( ToDoID INTEGER PRIMARY KEY AUTOINCREMENT, ToDoTaskDetails TEXT, ToDoTaskPrority TEXT, ToDoTaskStatus TEXT )";
+        String createTableQuery = "create table if not exists " + TableName + " ( ToDoID INTEGER PRIMARY KEY AUTOINCREMENT, ToDoTaskDetails TEXT, ToDoTaskPrority TEXT, ToDoTaskStatus TEXT, ToDoNotes TEXT)";
         db.execSQL(createTableQuery);
     }
 
@@ -70,6 +71,8 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 + Col_3 + "='" + td.getToDoTaskPrority()
                 + "', "
                 + Col_4 + "='" + td.getToDoTaskStatus()
+                + "', "
+                + Col_5 + "='" + td.getToDoNotes()
                 + "' WHERE " + Col_1 + "='" + td.getToDoID() + "'";
         Cursor results = db.rawQuery(query, null);
         return results;

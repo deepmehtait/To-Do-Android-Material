@@ -1,8 +1,14 @@
 package com.todo.deepmetha.todo.activity;
 
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +33,7 @@ import com.todo.deepmetha.todo.sqlite.SqliteHelper;
 import com.todo.deepmetha.todo.utils.AppTager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     FloatingActionButton addTask;
@@ -58,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 updateCardView();
             }
         });
+        scheduleNotification();
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     public void onClick(View view) {
                         Log.v(AppTager.getTag(), "save clicked");
                         EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
+                        EditText todoNotes = (EditText) dialog.findViewById(R.id.input_task_notes);
                         if (todoText.getText().length() >= 2) {
                             RadioGroup proritySelection = (RadioGroup) dialog.findViewById(R.id.toDoRG);
                             String RadioSelection = new String();
@@ -90,17 +99,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             contentValues.put("ToDoTaskDetails", todoText.getText().toString());
                             contentValues.put("ToDoTaskPrority", RadioSelection);
                             contentValues.put("ToDoTaskStatus", "Incomplete");
+                            contentValues.put("ToDoNotes", todoNotes.getText().toString());
                             mysqlite = new SqliteHelper(getApplicationContext());
                             Boolean b = mysqlite.insertInto(contentValues);
                             if (b) {
                                 dialog.hide();
                                 updateCardView();
                             } else {
-                                Toast.makeText(getApplicationContext(), "Some thing went wrong", Toast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(), "Some thing went wrong", Toast.LENGTH_SHORT).show();
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Please enter To Do Task", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Please enter To Do Task", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -110,7 +120,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
     }
+    public void scheduleNotification() {
+        Log.v(AppTager.getTag(),"Scheduling?");
+        Calendar Calendar_Object = Calendar.getInstance();
+        Log.v(AppTager.getTag(),"Cal- " + Calendar_Object.getTimeInMillis());
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent myIntent = new Intent(MainActivity.this, AlarmRecever.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,
+                0, myIntent, 0);
+        alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis() +(60 * 1000),
+                pendingIntent);
 
+    }
     public void updateCardView() {
         swipeRefreshLayout.setRefreshing(true);
         mysqlite = new SqliteHelper(getApplicationContext());
@@ -127,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 tddObj.setToDoTaskDetails(result.getString(1));
                 tddObj.setToDoTaskPrority(result.getString(2));
                 tddObj.setToDoTaskStatus(result.getString(3));
+                tddObj.setToDoNotes(result.getString(4));
                 tdd.add(tddObj);
                 Log.v(AppTager.getTag(), tddObj.toString());
             }

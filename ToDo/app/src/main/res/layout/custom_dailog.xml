@@ -66,7 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/prority"
-        android:layout_marginLeft="80dp"
         android:checkedButton="@+id/normal"
         android:gravity="center"
         android:orientation="horizontal">
@@ -89,7 +88,6 @@
             android:id="@+id/low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:gravity="center"
             android:text="Low" />
 
