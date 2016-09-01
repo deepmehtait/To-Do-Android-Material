@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,23 +66,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 updateCardView();
             }
         });
-        scheduleNotification();
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v(AppTager.getTag(), "Opening Custom Dailog");
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.custom_dailog);
                 dialog.show();
                 Button save = (Button) dialog.findViewById(R.id.btn_save);
+                Button cancel = (Button) dialog.findViewById(R.id.btn_cancel);
                 CheckBox cb = (CheckBox) dialog.findViewById(R.id.checkbox);
                 TextView tvstatus = (TextView) dialog.findViewById(R.id.status);
                 cb.setVisibility(View.GONE);
                 tvstatus.setVisibility(View.GONE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.v(AppTager.getTag(), "save clicked");
                         EditText todoText = (EditText) dialog.findViewById(R.id.input_task_desc);
                         EditText todoNotes = (EditText) dialog.findViewById(R.id.input_task_notes);
                         if (todoText.getText().length() >= 2) {
@@ -94,7 +99,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 RadioButton btn = (RadioButton) proritySelection.getChildAt(radioId);
                                 RadioSelection = (String) btn.getText();
                             }
-                            Log.v(AppTager.getTag(), "To Do -" + todoText.getText() + " prority - " + RadioSelection);
+                            Spinner getTime = (Spinner) dialog.findViewById(R.id.spinner);
+                            EditText timeInNumb = (EditText) dialog.findViewById(R.id.input_task_time);
+                            if(getTime.getSelectedItem().toString().matches("Days")) {
+                                // Convert timeInNumb to Days in Miliseconds
+                                int longtime = Integer.parseInt(timeInNumb.getText().toString());
+                                long miliTime = longtime * 24 * 60 * 60 * 1000 ;
+                                scheduleNotification(miliTime,todoText.getText().toString(),RadioSelection);
+                            } else if (getTime.getSelectedItem().toString().matches("Minutes")) {
+                                // Convert timeInNumb to Minutes in Miliseconds
+                                int longtime = Integer.parseInt(timeInNumb.getText().toString());
+                                long miliTime = longtime * 60 * 1000 ;
+                                scheduleNotification(miliTime,todoText.getText().toString(),RadioSelection);
+                            } else if (getTime.getSelectedItem().toString().matches("Hours")) {
+                                // Convert timeInNumb to Hours in Miliseconds
+                                int longtime = Integer.parseInt(timeInNumb.getText().toString());
+                                long miliTime = longtime * 60 * 60 * 1000 ;
+                                scheduleNotification(miliTime,todoText.getText().toString(),RadioSelection);
+                            }
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("ToDoTaskDetails", todoText.getText().toString());
                             contentValues.put("ToDoTaskPrority", RadioSelection);
@@ -120,15 +142,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
     }
-    public void scheduleNotification() {
-        Log.v(AppTager.getTag(),"Scheduling?");
+    public void scheduleNotification(long time, String TaskTitle, String TaskPrority) {
         Calendar Calendar_Object = Calendar.getInstance();
-        Log.v(AppTager.getTag(),"Cal- " + Calendar_Object.getTimeInMillis());
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent myIntent = new Intent(MainActivity.this, AlarmRecever.class);
+        myIntent.putExtra("Hello","Hello");
+        myIntent.putExtra("TaskTitle", TaskTitle);
+        myIntent.putExtra("TaskPrority",TaskPrority);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,
                 0, myIntent, 0);
-        alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis() +(60 * 1000),
+        // +(60 * 1000)
+        alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis() + time,
                 pendingIntent);
 
     }
@@ -150,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 tddObj.setToDoTaskStatus(result.getString(3));
                 tddObj.setToDoNotes(result.getString(4));
                 tdd.add(tddObj);
-                Log.v(AppTager.getTag(), tddObj.toString());
             }
             adapter.notifyDataSetChanged();
         }

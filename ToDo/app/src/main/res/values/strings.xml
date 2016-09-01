@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">To Do</string>
+    <string-array name="time">
+        <item>None</item>
+        <item>Minutes</item>
+        <item>Hours</item>
+        <item>Days</item>
+    </string-array>
 </resources>

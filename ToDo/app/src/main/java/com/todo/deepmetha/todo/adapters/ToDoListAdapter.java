@@ -1,7 +1,6 @@
 package com.todo.deepmetha.todo.adapters;
 
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -18,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -88,7 +88,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                         @Override
                         public void run() {
                             // Code here will run in UI thread
-                            Log.v(AppTager.getTag(), "IN UI thread");
                             /* ToDoDataArrayList.remove(position);
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position,ToDoDataArrayList.size()); */
@@ -114,9 +113,13 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                 RadioButton rbHigh = (RadioButton) dialog.findViewById(R.id.high);
                 RadioButton rbNormal = (RadioButton) dialog.findViewById(R.id.normal);
                 RadioButton rbLow = (RadioButton) dialog.findViewById(R.id.low);
-                if(td.getToDoTaskPrority().matches("Normal")) {
+                LinearLayout lv = (LinearLayout) dialog.findViewById(R.id.linearLayout);
+                TextView tv = (TextView) dialog.findViewById(R.id.Remainder);
+                tv.setVisibility(View.GONE);
+                lv.setVisibility(View.GONE);
+                if (td.getToDoTaskPrority().matches("Normal")) {
                     rbNormal.setChecked(true);
-                } else if(td.getToDoTaskPrority().matches("Low")) {
+                } else if (td.getToDoTaskPrority().matches("Low")) {
                     rbLow.setChecked(true);
                 } else {
                     rbHigh.setChecked(true);
@@ -126,8 +129,14 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                 }
                 todoText.setText(td.getToDoTaskDetails());
                 todoNote.setText(td.getToDoNotes());
-                Log.v(AppTager.getTag(), td.toString());
                 Button save = (Button) dialog.findViewById(R.id.btn_save);
+                Button cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -144,7 +153,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                                 RadioButton btn = (RadioButton) proritySelection.getChildAt(radioId);
                                 RadioSelection = (String) btn.getText();
                             }
-                            Log.v(AppTager.getTag(), "To Do -" + todoText.getText() + " prority - " + RadioSelection);
                             ToDoData updateTd = new ToDoData();
                             updateTd.setToDoID(td.getToDoID());
                             updateTd.setToDoTaskDetails(todoText.getText().toString());
@@ -164,7 +172,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                                     @Override
                                     public void run() {
                                         // Code here will run in UI thread
-                                        Log.v(AppTager.getTag(), "IN UI thread");
                                         notifyDataSetChanged();
                                     }
                                 });
@@ -179,15 +186,14 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                         } else {
                             Toast.makeText(view.getContext(), "Please enter To Do Task", Toast.LENGTH_SHORT).show();
                         }
-                        Log.v(AppTager.getTag(), "Save Clicked of edit");
                     }
                 });
-                Log.v(AppTager.getTag(), "edit clicked?");
             }
         });
 
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -210,7 +216,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.v(AppTager.getTag(), "clicked on task");
                 }
             });
         }
