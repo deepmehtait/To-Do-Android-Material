@@ -1,205 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:minHeight="200dp"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <!-- Heading -->
-
-    <!-- Task Description -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/toDoTextNotes"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toDoText"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:theme="@style/AppTheme">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:minHeight="200dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/input_task_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Notes"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
+        <!-- Heading -->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add New Task"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/toDoText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:theme="@style/AppTheme">
-
-        <EditText
-            android:id="@+id/input_task_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="To Do"
-            android:focusable="true"
-            android:inputType="text"
-        ><requestFocus /></EditText>
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/prority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toDoTextNotes"
-        android:focusable="true"
-        android:text="Prority"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary" />
-
-    <RadioGroup
-        android:id="@+id/toDoRG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/prority"
-        android:checkedButton="@+id/normal"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/high"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="High" />
-
-        <RadioButton
-            android:id="@+id/normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Normal" />
-
-        <RadioButton
-            android:id="@+id/low"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Low" />
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toDoRG"
-        android:focusable="true"
-        android:text="Task Status"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary" />
-
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/status"
-        android:layout_centerInParent="true"
-        android:text="Completed?" />
-
-    <TextView
-        android:id="@+id/Remainder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/checkbox"
-        android:focusable="true"
-        android:text="Set Remainder"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/linearLayout"
-        android:layout_below="@+id/Remainder"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
+        <!-- Task Description -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/toDoTextTime"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:id="@+id/toDoTextNotes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox"
+            android:layout_below="@+id/toDoText"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:theme="@style/AppTheme">
 
             <EditText
-                android:id="@+id/input_task_time"
+                android:id="@+id/input_task_notes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="Remind me in"
-                android:inputType="number" />
+                android:hint="Notes"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:entries="@array/time"
-            android:layout_margin="8dp"
-            android:layout_toEndOf="@+id/toDoTextTime"
-            android:layout_toRightOf="@+id/toDoTextTime"
-            android:layout_alignTop="@+id/toDoTextTime" />
+            android:text="Add New Task"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary" />
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/toDoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:theme="@style/AppTheme">
+
+            <EditText
+                android:id="@+id/input_task_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="To Do"
+                android:inputType="text">
+
+                <requestFocus />
+            </EditText>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/prority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toDoTextNotes"
+            android:focusable="true"
+            android:text="Prority"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary" />
+
+        <RadioGroup
+            android:id="@+id/toDoRG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prority"
+            android:checkedButton="@+id/normal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="High" />
+
+            <RadioButton
+                android:id="@+id/normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Normal" />
+
+            <RadioButton
+                android:id="@+id/low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Low" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toDoRG"
+            android:focusable="true"
+            android:text="Task Status"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary" />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status"
+            android:layout_centerInParent="true"
+            android:text="Completed?" />
+
+        <TextView
+            android:id="@+id/Remainder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox"
+            android:focusable="true"
+            android:text="Set Remainder"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Remainder"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/toDoTextTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:theme="@style/AppTheme">
+
+                <EditText
+                    android:id="@+id/input_task_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Remind me in"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/toDoTextTime"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@+id/toDoTextTime"
+                android:layout_toRightOf="@+id/toDoTextTime"
+                android:layout_weight="1"
+                android:entries="@array/time" />
+
+        </LinearLayout>
 
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_save"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayout"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"
-        android:elevation="10dp"
-        android:padding="12dp"
-        android:text="Save"
-        android:textColor="@color/primary"
-        android:textColorLink="@color/primary"
-        android:textSize="15sp">
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"
+            android:elevation="10dp"
+            android:padding="12dp"
+            android:text="Save"
+            android:textColor="@color/primary"
+            android:textColorLink="@color/primary"
+            android:textSize="15sp">
 
-    </android.support.v7.widget.AppCompatButton>
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_cancel"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:elevation="10dp"
-        android:padding="12dp"
-        android:text="Cancel"
-        android:textColor="@color/primary_text"
-        android:textColorLink="@color/primary"
-        android:textSize="15sp"
-        android:layout_alignTop="@+id/btn_save"
-        android:layout_toLeftOf="@+id/btn_save"
-        android:layout_toStartOf="@+id/btn_save">
+        </android.support.v7.widget.AppCompatButton>
 
-    </android.support.v7.widget.AppCompatButton>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btn_save"
+            android:layout_toLeftOf="@+id/btn_save"
+            android:layout_toStartOf="@+id/btn_save"
+            android:background="@android:color/transparent"
+            android:elevation="10dp"
+            android:padding="12dp"
+            android:text="Cancel"
+            android:textColor="@color/primary_text"
+            android:textColorLink="@color/primary"
+            android:textSize="15sp">
 
+        </android.support.v7.widget.AppCompatButton>
 
-
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
