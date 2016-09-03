@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -41,6 +43,7 @@ public class NotificationService extends Service {
             Bundle b = intent.getExtras();
             String TaskTitle = b.getString("TaskTitle");
             String TaskPrority = b.getString("TaskPrority");
+            int id = b.getInt("id");
             /*
          * When the user taps the notification we have to show the Home Screen
 		 * of our App, this job can be done with the help of the following
@@ -52,10 +55,8 @@ public class NotificationService extends Service {
                     | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             PendingIntent pendingNotificationIntent = PendingIntent.getActivity(
-                    this.getApplicationContext(), 0, intent1,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-
-
+                    this.getApplicationContext(), id, intent1,
+                    PendingIntent.FLAG_ONE_SHOT);
             Notification.Builder builder = new Notification.Builder(this.getApplicationContext());
             builder.setAutoCancel(true);
             builder.setContentTitle("To Do Remainder ");
@@ -63,11 +64,19 @@ public class NotificationService extends Service {
             builder.setSmallIcon(R.drawable.ic_notification);
             builder.setContentIntent(pendingNotificationIntent);
             builder.setOngoing(true);
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+            if (TaskPrority.matches("Normal")) {
+                builder.setLights(Color.BLUE, 3000, 3000);
+            } else if (TaskPrority.matches("Low")) {
+                builder.setLights(Color.GREEN, 3000, 3000);
+            } else {
+                builder.setLights(Color.RED, 3000, 3000);
+            }
             builder.setSubText("Prority: " + TaskPrority);   //API level 16
             builder.build();
-
             Notification myNotication = builder.getNotification();
-            mManager.notify(0, myNotication);
+            mManager.notify(id, myNotication);
         }
     }
 

@@ -145,13 +145,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void scheduleNotification(long time, String TaskTitle, String TaskPrority) {
         Calendar Calendar_Object = Calendar.getInstance();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        final int _id = (int) System.currentTimeMillis();
         Intent myIntent = new Intent(MainActivity.this, AlarmRecever.class);
-        myIntent.putExtra("Hello","Hello");
         myIntent.putExtra("TaskTitle", TaskTitle);
         myIntent.putExtra("TaskPrority",TaskPrority);
+        myIntent.putExtra("id",_id);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,
-                0, myIntent, 0);
-        // +(60 * 1000)
+                _id, myIntent, PendingIntent.FLAG_ONE_SHOT);
         alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis() + time,
                 pendingIntent);
 

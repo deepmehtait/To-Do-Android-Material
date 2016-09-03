@@ -18,10 +18,11 @@ public class AlarmRecever extends BroadcastReceiver{
             Bundle b = intent.getExtras();
             String TaskTitle = b.getString("TaskTitle");
             String TaskPrority = b.getString("TaskPrority");
+            int _id = b.getInt("id");
             Intent myIntent = new Intent(context, NotificationService.class);
-            myIntent.putExtra("Hello","Test");
             myIntent.putExtra("TaskTitle", TaskTitle);
             myIntent.putExtra("TaskPrority",TaskPrority);
+            myIntent.putExtra("id",_id);
             context.startService(myIntent);
         }
 
