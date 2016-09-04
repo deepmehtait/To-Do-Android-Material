@@ -47,9 +47,6 @@ Smooth scrolling and View animation:
 ## Notes
 
 Database Schema
-| ToDoID| ToDoTaskDetails|ToDoTaskPrority|ToDoTaskStatus|ToDoNotes|
-| ------------- |:-------------:| -----:|---------------:|--------:|
-| Unique ID for each Task|Task Details |Task Prority- High, Normal, Low | Completed? | Extra Notes |
 
 ToDoID | ToDoTaskDetails | ToDoTaskPrority | ToDoTaskStatus | ToDoNotes |
 --- | --- | --- | --- | --- |
