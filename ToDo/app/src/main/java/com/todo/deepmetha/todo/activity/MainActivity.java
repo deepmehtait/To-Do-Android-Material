@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             Toast.makeText(getApplicationContext(), "No Tasks", Toast.LENGTH_SHORT).show();
         } else {
             tdd.clear();
+            adapter.notifyDataSetChanged();
             while (result.moveToNext()) {
                 ToDoData tddObj = new ToDoData();
                 tddObj.setToDoID(result.getInt(0));
