@@ -101,17 +101,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             }
                             Spinner getTime = (Spinner) dialog.findViewById(R.id.spinner);
                             EditText timeInNumb = (EditText) dialog.findViewById(R.id.input_task_time);
-                            if(getTime.getSelectedItem().toString().matches("Days")) {
+                            if(getTime.getSelectedItem().toString().matches("Days") && !(timeInNumb.getText().toString().matches(""))) {
                                 // Convert timeInNumb to Days in Miliseconds
                                 int longtime = Integer.parseInt(timeInNumb.getText().toString());
                                 long miliTime = longtime * 24 * 60 * 60 * 1000 ;
                                 scheduleNotification(miliTime,todoText.getText().toString(),RadioSelection);
-                            } else if (getTime.getSelectedItem().toString().matches("Minutes")) {
+                            } else if (getTime.getSelectedItem().toString().matches("Minutes") && !(timeInNumb.getText().toString().matches(""))) {
                                 // Convert timeInNumb to Minutes in Miliseconds
                                 int longtime = Integer.parseInt(timeInNumb.getText().toString());
                                 long miliTime = longtime * 60 * 1000 ;
                                 scheduleNotification(miliTime,todoText.getText().toString(),RadioSelection);
-                            } else if (getTime.getSelectedItem().toString().matches("Hours")) {
+                            } else if (getTime.getSelectedItem().toString().matches("Hours") && !(timeInNumb.getText().toString().matches(""))) {
                                 // Convert timeInNumb to Hours in Miliseconds
                                 int longtime = Integer.parseInt(timeInNumb.getText().toString());
                                 long miliTime = longtime * 60 * 60 * 1000 ;
