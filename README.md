@@ -1,6 +1,7 @@
 # To-Do-Android-Material
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<br/>
 Simple todo Android Application to learn Android Design Principles 
-
 **To Do** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing,deleting an existing item and reminder of todo items using local notifications.
 
 Submitted by: **Deep Mehta**
